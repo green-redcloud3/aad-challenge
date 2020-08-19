@@ -36,8 +36,12 @@ configuration DomainController
 
         Script InstallAADConnect
         {
+	    <# commented this out because it is only needed for azure devops to azure AD integration 
+	       only needed if synchronizing identities to cloud (NOT NEEDED FOR WHAT WE ARE DOING)
+	       AADHybridLab sets up AD, Forest and all of that locally
             SetScript = {
                 $AADConnectDLUrl="https://download.microsoft.com/download/B/0/0/B00291D0-5A83-4DE7-86F5-980BC00DE05A/AzureADConnect.msi"
+
                 $exe="$env:SystemRoot\system32\msiexec.exe"
 
                 $tempfile = [System.IO.Path]::GetTempFileName()
@@ -51,13 +55,15 @@ configuration DomainController
 
                 Invoke-Expression "& `"$exe`" /i $MSIPath /qn /passive /forcerestart"
             }
+		#>
 
             GetScript =  { @{} }
             TestScript = { 
                 return Test-Path "$env:TEMP\AzureADConnect.msi" 
             }
         }
-
+<#
+Not needed
         Script CreateOU
         {
             SetScript = {
@@ -121,7 +127,7 @@ configuration DomainController
             DependsOn  = '[Script]CreateOU'
         }
 		
-		Script AddTools
+        Script AddTools
         {
             SetScript  = {
 				# Install AAD Tools
@@ -134,7 +140,7 @@ configuration DomainController
 
 					#Install-Module -Name AzureADPreview -AllowClobber -Force
 
-					#Install-Module -Name AzureRM –AllowClobber -Force
+					#Install-Module -Name AzureRM â€“AllowClobber -Force
 
                 }
 
@@ -144,5 +150,6 @@ configuration DomainController
                 return ($key -ine $null)
             }
 		}
-    }
+       }
+#>       
 }
