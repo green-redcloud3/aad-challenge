@@ -92,7 +92,7 @@
     "adTemplateURI": "[concat(parameters('assetLocation'),'Templates/adDeploy.json')]",
     "imageOffer": "WindowsServer",
     "imagePublisher": "MicrosoftWindowsServer",
-    "imageSKU": "2012-R2-Datacenter",
+    "imageSKU": "2019-Datacenter",
     "nsgTemplateURI": "[concat(parameters('assetLocation'),'Templates/NSGs.json')]",
     "vnetTemplateURI": "[concat(parameters('assetLocation'),'Templates/deployVNet.json')]",
     "vnetDNSTemplateURI": "[concat(parameters('assetLocation'),'Templates/deployVNetDNS.json')]",
